@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/app.css";
 import "../styles/ribbon-corner.css";
+import "../styles/image-button.css";
 import { menuItems } from "./menuItems";
 import { addons } from "./addons";
 
@@ -23,6 +24,9 @@ function Menu({ item, order, setOrder }) {
   switch (item) {
     case "pizzas":
       json = menuItems.pizzas;
+      break;
+    case "sandwiches":
+      json = menuItems.sandwiches;
       break;
     case "pastas":
       json = menuItems.pastas;
@@ -133,12 +137,16 @@ function Menu({ item, order, setOrder }) {
         addOns: addOnList,
       });
 
+      if (data.amount) {
+        record[0].amount = data.amount;
+      }
+
       if (data.type) {
         var select = document.getElementById("myList" + data.id);
         let index = select.selectedIndex;
 
         record[0].size = data.type[index].size;
-        record[0].amount = data.type[index].amount;
+        if (data.type[index].amount) record[0].amount = data.type[index].amount;
         record[0].information = data.type[index].information;
       }
 
@@ -151,25 +159,38 @@ function Menu({ item, order, setOrder }) {
       {json.map((data) => {
         return (
           <div key={data.id} className="menu-container parent">
-            {data.customize ? <div className="ribbon">Customize</div> : <></>}
-            {data.customize ? (
-              <img
-                className="menu-image"
-                src={data.image}
-                alt={data.name}
-                onClick={(e) => {
-                  setMenuItem(data);
-                  openModal(data.name);
-                }}
-              />
+            {data.hasOwnProperty("new") && data.new ? (
+              <div className="ribbon regular-font weight-light">New</div>
             ) : (
-              <img className="menu-image" src={data.image} alt={data.name} />
+              <></>
             )}
+            <div className="image-container">
+              <img className="menu-image" src={data.image} alt={data.name} />
+              <button className="btn regular-font weight-light">
+                Customize
+              </button>
+            </div>
             <div className="item">
               <div className="item-name">{data.name}</div>
               <div className="regular-font weight-light">{data.calory}</div>
-              <div className="item-desc regular-font weight-light">
+              <div className="item-desc regular-font weight-light item-desc">
                 {data.description}
+              </div>
+              <div>
+                {data.addons ? (
+                  <a
+                    href="#"
+                    className="regular-font weight-light"
+                    onClick={(e) => {
+                      setMenuItem(data);
+                      openModal(data.name);
+                    }}
+                  >
+                    Addons +
+                  </a>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
 
@@ -222,24 +243,27 @@ function Menu({ item, order, setOrder }) {
                 </div>
               </div>
             </div>
-
-            <select
-              id={"myList" + data.id}
-              className="dropdown"
-              defaultValue={data.type[0]}
-              onChange={(e) => {
-                setMenuItem(data);
-                selectItem(data);
-              }}
-            >
-              {data.type.map((record, idx) => {
-                return (
-                  <option key={idx} value={record.amount}>
-                    {record.size} {record.information}
-                  </option>
-                );
-              })}
-            </select>
+            {data.hasOwnProperty("type") ? (
+              <select
+                id={"myList" + data.id}
+                className="dropdown"
+                defaultValue={data.type[0]}
+                onChange={(e) => {
+                  setMenuItem(data);
+                  selectItem(data);
+                }}
+              >
+                {data.type.map((record, idx) => {
+                  return (
+                    <option key={idx} value={record.amount}>
+                      {record.size} {record.information}
+                    </option>
+                  );
+                })}
+              </select>
+            ) : (
+              <></>
+            )}
             <button
               id={"select-button" + data.id}
               type="submit"
@@ -249,7 +273,8 @@ function Menu({ item, order, setOrder }) {
               }}
               className="select-button"
             >
-              ADD {data.type[0].amount}
+              ADD{" "}
+              {data.hasOwnProperty("type") ? data.type[0].amount : data.amount}
             </button>
           </div>
         );

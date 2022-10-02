@@ -4,7 +4,7 @@ export const menuItems = {
       id: "1",
       name: "Hawaiian",
       calory: "210-260 Cals/slice",
-      customize: false,
+      addons: false,
       description: "Ham, pineapple and extra pizza mozzarella",
       image:
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.hawaiian.6c049fb1897c6f45f597dd1671fbd016.1.jpg?width=300",
@@ -35,7 +35,7 @@ export const menuItems = {
       id: "2",
       name: "The Great 'Beyond'",
       calory: "200-270 Cals/slice",
-      customize: false,
+      addons: false,
       description:
         "Beyond Meat Italian Sausage Crumble, hot pepers, Red Onion, and Pizza Mozzarella",
       image:
@@ -67,7 +67,7 @@ export const menuItems = {
       id: "3",
       name: "Canadian",
       calory: "220-270 Cals/slice",
-      customize: false,
+      addons: false,
       description:
         "Pepperoni, bacon crumble, sliced mushrooms and pizza mozzarella",
       image:
@@ -98,8 +98,9 @@ export const menuItems = {
     {
       id: "4",
       name: "Chicken Caesar",
+      new: true,
       calory: "200-240 Cals/slice",
-      customize: false,
+      addons: false,
       description:
         "Alfredo sauce, seasoned grilled chicken breast, bacon crumble, roasted garlic, parmesan and pizza mozzarella",
       image:
@@ -131,7 +132,7 @@ export const menuItems = {
       id: "5",
       name: "Pepperoni Lover's",
       calory: "240-290 Cals/slice",
-      customize: true,
+      addons: false,
       description: "Double pepperoni and extra pizza mozzarella",
       image:
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.veggie-lovers.48ba54d49ff2257671521b477967633a.1.jpg",
@@ -162,9 +163,9 @@ export const menuItems = {
 
   pastas: [
     {
-      id: "5",
+      id: "13",
       name: "Creamy Chicken Alfredo",
-      customize: false,
+      addons: false,
       description:
         "Alfredo sauce tossed with rotini pasta, topped with seasoned grilled chicken breast, pizza mozzarella and oven-baked. Includes fresh breadsticks",
       image:
@@ -186,7 +187,7 @@ export const menuItems = {
     {
       id: "6",
       name: "Meaty Marinara",
-      customize: false,
+      addons: false,
       description:
         "Bolognese meat sauce tossed with rotini pasta, topped with pizza mozzarella and oven-baked. Include fresh breadsticks.",
       image:
@@ -208,7 +209,7 @@ export const menuItems = {
     {
       id: "7",
       name: "Mediterranean con Pollo",
-      customize: false,
+      addons: false,
       description:
         "Marinara and pesto sauce tossed with whole grain rotini, topped with seasoned grilled chicken breast, roasted red peppers, red onion, green peppers, black olives, feta pizza mozzarella and oven-baked. Includes fresh breadsticks",
       image:
@@ -224,6 +225,81 @@ export const menuItems = {
           size: "regular",
           amount: "13.98",
           information: "Serves 2",
+        },
+      ],
+    },
+  ],
+  sandwiches: [
+    {
+      id: "8",
+      name: "Chicken Caesar",
+      calory: "580 Cals/each",
+      addons: false,
+      description:
+        "Grilled Chicken Breast topped with lettuce, tomato and Caesar Dressing",
+      image:
+        "https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/PSWchickcaes.jpg",
+      type: [
+        {
+          size: "No Bacon",
+          amount: "8.99",
+          information: "580 Cals/each",
+        },
+        {
+          size: "With Bacon",
+          amount: "10.58",
+          information: "670 Cals/each",
+        },
+      ],
+    },
+    {
+      id: "9",
+      name: "Chicken Cutlet",
+      calory: "680 Cals/each",
+      addons: true,
+      amount: 9.79,
+      description: "Lightly breaded and smothered in tomato sauce",
+      image:
+        "https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/PSWchickcut.jpg",
+    },
+    {
+      id: "10",
+      name: "Meatball Sandwich",
+      calory: "610 Cals/each",
+      addons: true,
+      amount: 8.99,
+      description: "Served with Tomato Sauce on our Toasted Ciabatta Bread",
+      image:
+        "https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/PSWmeatball.jpg",
+    },
+    {
+      id: "11",
+      name: "Veat Cutlet",
+      calory: "650 Cals/each",
+      addons: true,
+      amount: 9.79,
+      description: "Lightly breaded and smothered in tomato sauce",
+      image:
+        "https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/PSWvealcut.jpg",
+    },
+    {
+      id: "12",
+      name: "Lasagna",
+      calory: "650 Cals/each",
+      addons: false,
+      description: "Layers of meat sauce and cheese baked to perfection",
+      image:
+        "https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/PPLlasagna.jpg",
+      type: [
+        {
+          size: "Half Garlic Bread",
+          amount: "11.99",
+          information: "1100 Cals/each",
+        },
+        {
+          size: "Half Garlic Bread with Cheese",
+          amount: "12.79",
+          information: "1250 Cals/each",
         },
       ],
     },

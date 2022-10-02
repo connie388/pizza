@@ -27,7 +27,7 @@ function Navbar({ item, setItem }) {
   }, []);
 
   return (
-    <div className={windowSize.innerWidth > 500 ? "scrollmenu" : "sidebar"}>
+    <div className={windowSize.innerWidth > 950 ? "scrollmenu" : "sidebar"}>
       <a
         href="#home"
         className={item === "deals" ? "active" : "navitem"}
@@ -36,42 +36,42 @@ function Navbar({ item, setItem }) {
         Deals
       </a>
       <a
-        href="#news"
+        href="#"
         className={item === "pizzas" ? "active" : "navitem"}
         onClick={() => changeActiveItem("pizzas")}
       >
         Pizzas
       </a>
       <a
-        href="#contact"
-        className={item === "wings" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("wings")}
+        href="#"
+        className={item === "sandwiches" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("sandwiches")}
       >
-        Wings
+        Sandwiches
       </a>
       <a
-        href="#about"
+        href="#"
         className={item === "pastas" ? "active" : "navitem"}
         onClick={() => changeActiveItem("pastas")}
       >
         Pastas
       </a>
       <a
-        href="#about"
+        href="#"
         className={item === "sides" ? "active" : "navitem"}
         onClick={() => changeActiveItem("sides")}
       >
         Sides
       </a>
       <a
-        href="#about"
+        href="#"
         className={item === "desserts" ? "active" : "navitem"}
         onClick={() => changeActiveItem("desserts")}
       >
         Desserts
       </a>
       <a
-        href="#about"
+        href=""
         name="drinks"
         className={item === "drinks" ? "active" : "navitem"}
         onClick={() => changeActiveItem("drinks")}

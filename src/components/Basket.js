@@ -17,7 +17,7 @@ function Basket({ order, setOrder }) {
   let total = totalAmount();
   let gst = ((total * 13) / 100).toFixed(2);
   return (
-    <div className="checkout">
+    <div className="basket">
       <h1>Your Basket</h1>
       <div>{order.length} Items</div>
       {order.length === 0 ? (
@@ -47,7 +47,7 @@ function Basket({ order, setOrder }) {
                         return (
                           <div key={index} className="inline-container">
                             <div className="regular-font weight-light middle">
-                              {data}
+                              +{data}
                             </div>
                             <div className="regular-font weight-light right">
                               {addOn.price}
