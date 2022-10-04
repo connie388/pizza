@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Order from "./components/Order";
 
 function App() {
-  const [item, setItem] = useState("deals");
+  const [item, setItem] = useState("home");
   return (
     <div className="App">
       <Navbar item={item} setItem={setItem} />

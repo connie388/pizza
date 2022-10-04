@@ -149,12 +149,20 @@ a {
   width: 100%;
 }
 
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
 @media screen and (max-width: 950px) {
   .box {
     display: flex;
     list-style: none;
     gap: 10px;
-    /* margin: 2%; */
+    width: 100%;
     flex-wrap: wrap;
     margin-left: 160px;
   }

@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../styles/navbar.css";
-import "../styles/sidebar.css";
-
-function getWindowSize() {
-  const { innerWidth, innerHeight } = window;
-  return { innerWidth, innerHeight };
-}
 
 function Navbar({ item, setItem }) {
-  const [windowSize, setWindowSize] = useState(getWindowSize());
-
   const changeActiveItem = (itemName) => {
     setItem(itemName);
   };
 
-  useEffect(() => {
-    function handleWindowResize() {
-      setWindowSize(getWindowSize());
+  function toggleIcon() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
     }
-
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
+  }
 
   return (
-    <div className={windowSize.innerWidth > 950 ? "scrollmenu" : "sidebar"}>
+    <div class="topnav" id="myTopnav">
       <a
-        href="#home"
-        className={item === "deals" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("deals")}
+        href="#"
+        className={item === "home" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("home")}
       >
-        Deals
+        Home
       </a>
       <a
         href="#"
@@ -71,12 +60,15 @@ function Navbar({ item, setItem }) {
         Desserts
       </a>
       <a
-        href=""
+        href="#"
         name="drinks"
         className={item === "drinks" ? "active" : "navitem"}
         onClick={() => changeActiveItem("drinks")}
       >
         Drinks
+      </a>
+      <a href="#" class="icon" onClick={toggleIcon}>
+        <i class="fa fa-bars"></i>
       </a>
     </div>
   );

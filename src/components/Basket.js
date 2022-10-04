@@ -50,7 +50,7 @@ function Basket({ order, setOrder }) {
                               +{data}
                             </div>
                             <div className="regular-font weight-light right">
-                              {addOn.price}
+                              {addOn.price.toFixed()}
                             </div>
                           </div>
                         );
