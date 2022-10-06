@@ -9,20 +9,23 @@
 a {
   color: yellow;
 }
-.inline-container {
+
+.inline {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.block-container {
-  display: block;
-  text-align: center;
-}
-
 .div-btn-close {
   width: 100%;
   text-align: right;
+}
+
+.btn-close {
+  width: 5px;
+  height: 5px;
+  margin: 0;
+  margin-right: 2px;
 }
 
 .left {
@@ -54,10 +57,6 @@ a {
   margin: 5px;
 }
 
-#content {
-  column-count: 2;
-}
-
 .item {
   background-color: #a29f9b;
   padding: 10px;
@@ -69,8 +68,6 @@ a {
 .item-name {
   font-size: 16.8px;
   line-height: 1.5;
-  /* font-family: Sharp Sans Semibold Display No1, system-ui, BlinkMacSystemFont,
-    Helvetica Neue, Helvetica, sans-serif; */
 }
 
 .item-desc {
@@ -79,7 +76,7 @@ a {
 
 .select-button {
   width: 100%;
-  background-color: green;
+  background-color: #04aa6d;
   color: white;
   border: none;
 }
@@ -111,13 +108,13 @@ a {
   font-weight: 400;
 }
 
-.green {
-  color: green;
-}
 .weight-semi-bold {
   font-weight: 600;
 }
 
+.cart {
+  color: orangered;
+}
 .basket {
   margin: 10px;
 }
@@ -132,21 +129,6 @@ a {
 
 .hidden {
   display: none;
-}
-.modal {
-  position: fixed;
-  width: 600px;
-  height: 750px;
-  top: 80px;
-  left: calc(50% - 300px);
-  bottom: 50px;
-  background-color: orange;
-}
-
-.modal-title,
-#modal-title {
-  text-align: center;
-  width: 100%;
 }
 
 .display-block {
@@ -164,7 +146,6 @@ a {
     gap: 10px;
     width: 100%;
     flex-wrap: wrap;
-    margin-left: 160px;
   }
 
   .checkout {
@@ -176,7 +157,6 @@ a {
     width: 300px;
     height: 100%;
     position: static;
-    margin-left: 160px;
     background-color: rgb(241, 241, 241);
   }
 }

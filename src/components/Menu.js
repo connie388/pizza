@@ -66,7 +66,6 @@ function Menu({ item, order, setOrder }) {
           for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
               list.push(checkboxes[i].value);
-              console.log("checked = " + checkboxes[i].value);
             }
           }
 
@@ -123,9 +122,11 @@ function Menu({ item, order, setOrder }) {
             )}
             <div className="image-container">
               <img className="menu-image" src={data.image} alt={data.name} />
-              <button className="btn regular-font weight-light">
-                Customize
-              </button>
+              <p className="customize regular-font weight-light">Customize</p>
+              {/* <button className="customize btn regular-font weight-light"> */}
+              {/* Customize */}
+              {/* </button> */}
+              {/* </img> */}
             </div>
             <div className="item">
               <div id="data-name" className="item-name">

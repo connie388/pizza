@@ -48,14 +48,14 @@ function Modal({ handleClose, show, orderItem, selectedItem, recordNo }) {
               onClick={closeModal}
             ></button>
           </div>
-          <div className="modal-header block-container">
+          <div className="modal-header display-block">
             <h5 className="modal-title">CHOOSE ADDONS</h5>
-            <div id="modal-title" className="regular-font weight-semi-bold">
+            <div className="modal-title regular-font weight-semi-bold">
               FOR "{selectedItem.toUpperCase()}"
             </div>
           </div>
           <div className="modal-body">
-            <div id={"content" + recordNo}>
+            <div className="content" id={"content" + recordNo}>
               {addons.type.map((addon, index) => {
                 return (
                   <div key={"type" + addon.name}>
@@ -67,7 +67,7 @@ function Modal({ handleClose, show, orderItem, selectedItem, recordNo }) {
                     </label>
                     {addon.list.map((list, j) => {
                       return (
-                        <div key={addon.name + j}>
+                        <div className="inline" key={addon.name + j}>
                           <input
                             type="checkbox"
                             id={recordNo + "checkbox-" + addon.name + j}
@@ -91,25 +91,31 @@ function Modal({ handleClose, show, orderItem, selectedItem, recordNo }) {
             </div>
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-              onClick={closeModal}
-            >
-              Close
-            </button>
-            <button
-              id="add-to-cart"
-              type="button"
-              className="btn btn-primary"
-              onClick={(e) => {
-                orderItem(e, recordNo);
-                closeModal();
-              }}
-            >
-              Add to Cart
-            </button>
+            <div className="row">
+              <div className="col-50">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  onClick={closeModal}
+                >
+                  Close
+                </button>
+              </div>
+              <div className="col-50">
+                <button
+                  id="add-to-cart"
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    orderItem(e, recordNo);
+                    closeModal();
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

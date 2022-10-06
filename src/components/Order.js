@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import Menu from "./Menu";
 import Basket from "./Basket";
 
-function Order({ item }) {
-  const [order, setOrder] = useState([]);
-
+function Order({ item, setItem, order, setOrder, total, setTotal }) {
   return (
     <>
-      <div className="inline-container">
+      <div className="row">
         <Menu item={item} order={order} setOrder={setOrder} />
+
         <div className="checkout">
-          <Basket order={order} setOrder={setOrder} />
+          <Basket
+            order={order}
+            setOrder={setOrder}
+            setItem={setItem}
+            total={total}
+            setTotal={setTotal}
+          />
         </div>
       </div>
+
       <div className="hidden">
-        <Basket order={order} setOrder={setOrder} />
+        <Basket
+          order={order}
+          setOrder={setOrder}
+          setItem={setItem}
+          total={total}
+          setTotal={setTotal}
+        />
       </div>
     </>
   );

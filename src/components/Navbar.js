@@ -16,7 +16,7 @@ function Navbar({ item, setItem }) {
   }
 
   return (
-    <div class="topnav" id="myTopnav">
+    <div className="topnav" id="myTopnav">
       <a
         href="#"
         className={item === "home" ? "active" : "navitem"}
@@ -67,8 +67,8 @@ function Navbar({ item, setItem }) {
       >
         Drinks
       </a>
-      <a href="#" class="icon" onClick={toggleIcon}>
-        <i class="fa fa-bars"></i>
+      <a href="#" className="icon" onClick={toggleIcon}>
+        <i className="fa fa-bars"></i>
       </a>
     </div>
   );
