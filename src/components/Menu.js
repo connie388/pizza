@@ -6,7 +6,7 @@ import { menuItems } from "./menuItems";
 import { addons } from "./addons";
 import Modal from "./Modal";
 
-function Menu({ item, order, setOrder }) {
+function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
   const [show, setShow] = useState(false); // for Modal
   const [selected, setSelected] = useState([]); // select list's choices
   const [itemNo, setItemNo] = useState(-1); // keep track of the record no that open the modal
@@ -49,6 +49,11 @@ function Menu({ item, order, setOrder }) {
     document.querySelector("#select-button" + recordNo).textContent =
       "ADD $" + output;
   }
+
+  const customizeItem = (recordNo) => {
+    setCustomizeNo(recordNo);
+    setItem("customize");
+  };
 
   function orderItem(e, recordNo) {
     let temp = document.getElementById("hiddenInput" + recordNo);
@@ -121,13 +126,17 @@ function Menu({ item, order, setOrder }) {
               <></>
             )}
             <div className="image-container">
-              <img className="menu-image" src={data.image} alt={data.name} />
+              <img
+                className="menu-image"
+                src={data.image}
+                alt={data.name}
+                onClick={(e) => {
+                  customizeItem(recordNo);
+                }}
+              />
               <p className="customize regular-font weight-light">Customize</p>
-              {/* <button className="customize btn regular-font weight-light"> */}
-              {/* Customize */}
-              {/* </button> */}
-              {/* </img> */}
             </div>
+
             <div className="item">
               <div id="data-name" className="item-name">
                 {data.name}

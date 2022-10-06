@@ -51,25 +51,15 @@
   border-radius: 3px;
 }
 
-/* input[type="text"],
+input[type="text"],
 input[type="month"],
 input[type="email"],
-input[type="time"],
-input[type="submit"] { */
-input {
+input[type="time"] {
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
   border-radius: 3px;
 }
-
-/* input:invalid {
-  border-color: red;
-}
-
-input:valid {
-  border-color: 1px solid #ccc;
-} */
 
 input:invalid {
   background-color: #ffdddd;
@@ -85,8 +75,6 @@ input:valid {
 
 form:valid {
   border: 5px solid #ddffdd;
-  /* opacity: 1;
-  pointer-events: all; */
 }
 
 input:required {
