@@ -1,8 +1,8 @@
 import React from "react";
-import useForm from "../hooks/useForm";
+import useForm from "../util/useForm";
 import "../styles/checkout.css";
 import Basket from "./Basket";
-import { TextField } from "../hooks/textField";
+import { TextField } from "../util/TextField";
 
 function CheckOut({ order, setOrder, item, setItem, total, setTotal }) {
   //Final submit function
@@ -183,7 +183,7 @@ function CheckOut({ order, setOrder, item, setItem, total, setTotal }) {
                       </div>
                     )}
                   </div>
-                  {/* <h3>Delivery Time</h3> */}
+
                   <div className="row">
                     <div className="col-50">
                       <TextField
@@ -213,7 +213,7 @@ function CheckOut({ order, setOrder, item, setItem, total, setTotal }) {
               <input
                 type="submit"
                 value={"Place Your Order " + total}
-                className="btn"
+                className="checkout-btn"
               />
             </form>
           </div>
