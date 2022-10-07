@@ -173,12 +173,12 @@ export const menuItems = {
       calory: "1030 - 1130 Cals/serving",
       type: [
         {
-          size: "family",
+          size: "Family",
           amount: "18.99",
           information: "Serves 4",
         },
         {
-          size: "regular",
+          size: "Regular",
           amount: "11.99",
           information: "Serves 2",
         },
@@ -195,12 +195,12 @@ export const menuItems = {
       calory: "1030 - 1130 Cals/serving",
       type: [
         {
-          size: "family",
+          size: "Family",
           amount: "18.99",
           information: "Serves 4",
         },
         {
-          size: "regular",
+          size: "Regular",
           amount: "11.99",
           information: "Serves 2",
         },
@@ -217,12 +217,12 @@ export const menuItems = {
       calory: "990 - 1090 Cals/serving",
       type: [
         {
-          size: "family",
+          size: "Family",
           amount: "22.98",
           information: "Serves 4",
         },
         {
-          size: "regular",
+          size: "Regular",
           amount: "13.98",
           information: "Serves 2",
         },

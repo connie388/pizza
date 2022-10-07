@@ -1,25 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/app.css";
 import "../styles/ribbon-corner.css";
 import "../styles/image-button.css";
 import { menuItems } from "./menuItems";
 import { addons } from "./addons";
-import Modal from "./Modal";
+import Modal from "../util/Modal";
+import Toppings from "./Toppings";
 
 function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
   const [show, setShow] = useState(false); // for Modal
   const [selected, setSelected] = useState([]); // select list's choices
   const [itemNo, setItemNo] = useState(-1); // keep track of the record no that open the modal
+  const [checkedState, setCheckedState] = useState(
+    Array.from({ length: addons.type.length }, () =>
+      Array.from({ length: 100 }, () => false)
+    )
+  );
 
   const showModal = (recordNo) => {
     setShow(true);
     setItemNo(recordNo);
   };
 
+  const onSubmitModal = () => {
+    orderItem(itemNo);
+    hideModal();
+  };
+
   const hideModal = () => {
     setShow(false);
     setItemNo(-1);
+    if (addons.type) {
+      for (var j = 0; j < addons.type.length; j++) {
+        var checkboxes = document.getElementsByName(addons.type[j].name);
+        if (checkboxes && checkboxes.length > 0) {
+          for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = false;
+          }
+        }
+      }
+    }
+    let arr = Array.from({ length: addons.type.length }, () =>
+      Array.from({ length: 100 }, () => false)
+    );
+
+    setCheckedState(arr);
   };
+
+  // useEffect(() => {
+  //   setSelected([]);
+  // }, [item]);
 
   const getJson = () => {
     let json = {};
@@ -44,10 +74,10 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     copy[recordNo] = event.target.value;
     setSelected(copy); // update the state of select list
 
-    let selectElement = document.querySelector("#myList" + recordNo);
-    let output = selectElement.value;
-    document.querySelector("#select-button" + recordNo).textContent =
-      "ADD $" + output;
+    // let selectElement = document.querySelector("#myList" + recordNo);
+    // let output = selectElement.value;
+    // document.querySelector("#select-button" + recordNo).textContent =
+    //   "ADD $" + output;
   }
 
   const customizeItem = (recordNo) => {
@@ -55,7 +85,7 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     setItem("customize");
   };
 
-  function orderItem(e, recordNo) {
+  function orderItem(recordNo) {
     let temp = document.getElementById("hiddenInput" + recordNo);
     let data = JSON.parse(temp.value);
 
@@ -170,10 +200,17 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
               <Modal
                 show={show}
                 handleClose={hideModal}
-                orderItem={orderItem}
-                selectedItem={data.name}
+                title="CHOOSE ADDONS"
+                subtitle={"For " + data.name}
+                onSubmit={onSubmitModal}
                 recordNo={itemNo} // need to use itemNo otherwise always the largest index
-              ></Modal>
+              >
+                <Toppings
+                  recordNo={recordNo}
+                  checkedState={checkedState}
+                  setCheckedState={setCheckedState}
+                />
+              </Modal>
             ) : (
               <></>
             )}
@@ -201,12 +238,13 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
               id={"select-button" + recordNo}
               type="submit"
               onClick={(e) => {
-                orderItem(e, recordNo);
+                orderItem(recordNo);
               }}
               className="select-button"
             >
-              ADD{" "}
-              {data.hasOwnProperty("type") ? data.type[0].amount : data.amount}
+              SELECT
+              {/* ADD
+              {data.hasOwnProperty("type") ? data.type[0].amount : data.amount} */}
             </button>
           </div>
         );
