@@ -69,10 +69,11 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="CHOOSE YOUR TOPPINGS"
         chosenId="chosen-topping"
       >
-        <div>
+        <div className="customize-toppings">
           <Toppings
             checkedState={checkedState}
             setCheckedState={setCheckedState}
+            toppings={addons.type}
           />
         </div>
       </Collapsible>

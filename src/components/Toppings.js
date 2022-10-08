@@ -1,7 +1,6 @@
 import React from "react";
-import { addons } from "./addons";
 
-function Toppings({ recordNo, checkedState, setCheckedState }) {
+function Toppings({ recordNo, checkedState, toppings, setCheckedState }) {
   const handleOnChange = (row, column, event) => {
     let copy = [...checkedState];
     copy[row][column] = event.target.checked;
@@ -10,7 +9,7 @@ function Toppings({ recordNo, checkedState, setCheckedState }) {
 
   return (
     <div>
-      {addons.type.map((addon, index) => {
+      {toppings?.map((addon, index) => {
         return (
           <div key={"type" + addon.name}>
             <label

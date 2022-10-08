@@ -150,6 +150,10 @@ a {
   right: 0;
 }
 
+.customize-toppings {
+  column-count: 3;
+}
+
 .hidden {
   display: none;
 }

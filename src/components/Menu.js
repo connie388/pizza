@@ -11,15 +11,21 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
   const [show, setShow] = useState(false); // for Modal
   const [selected, setSelected] = useState([]); // select list's choices
   const [itemNo, setItemNo] = useState(-1); // keep track of the record no that open the modal
+  const [canChoose, setCanChoose] = useState([]);
+
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: addons.type.length }, () =>
       Array.from({ length: 100 }, () => false)
     )
   );
 
-  const showModal = (recordNo) => {
+  const showModal = (recordNo, canChooseItems) => {
     setShow(true);
     setItemNo(recordNo);
+    let toppings = addons.type.filter((d, i) =>
+      canChooseItems.includes(d.name)
+    );
+    setCanChoose(toppings);
   };
 
   const onSubmitModal = () => {
@@ -86,59 +92,56 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     let data = JSON.parse(temp.value);
 
     let addOnList = [];
-    if (addons.type) {
-      for (var j = 0; j < addons.type.length; j++) {
-        let addon = addons.type[j];
-        var checkboxes = document.getElementsByName(
-          recordNo + "-" + addon.name
-        );
-        if (checkboxes && checkboxes.length > 0) {
-          let list = [];
-          for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-              list.push(checkboxes[i].value);
-            }
-          }
 
-          if (list.length > 0) {
-            let listData = {
-              name: addon.name,
-              price: addon.price,
-              list: list,
-            };
-            addOnList.push(listData);
+    for (var j = 0; j < addons.type?.length; j++) {
+      let addon = addons.type[j];
+      var checkboxes = document.getElementsByName(recordNo + "-" + addon.name);
+      if (checkboxes && checkboxes.length > 0) {
+        let list = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            list.push(checkboxes[i].value);
           }
         }
+
+        if (list.length > 0) {
+          let listData = {
+            name: addon.name,
+            price: addon.price,
+            list: list,
+          };
+          addOnList.push(listData);
+        }
       }
-
-      let record = [];
-      record.push({
-        name: data.name,
-        calory: data.calory,
-        description: data.description,
-        addOns: addOnList,
-      });
-
-      if (data.amount) {
-        record[0].amount = data.amount;
-      }
-
-      if (data.type) {
-        var select = document.getElementById("myList" + recordNo);
-        let index = select.selectedIndex;
-
-        record[0].size = data.type[index].size;
-        if (data.type[index].amount) record[0].amount = data.type[index].amount;
-        record[0].information = data.type[index].information;
-      }
-
-      setOrder([...order, record[0]]);
     }
+
+    let record = [];
+    record.push({
+      name: data.name,
+      calory: data.calory,
+      description: data.description,
+      addOns: addOnList,
+    });
+
+    if (data.amount) {
+      record[0].amount = data.amount;
+    }
+
+    if (data.type) {
+      var select = document.getElementById("myList" + recordNo);
+      let index = select.selectedIndex;
+
+      record[0].size = data.type[index].size;
+      if (data.type[index].amount) record[0].amount = data.type[index].amount;
+      record[0].information = data.type[index].information;
+    }
+
+    setOrder([...order, record[0]]);
   }
 
   return (
     <div className="box">
-      {getJson().map((data, recordNo) => {
+      {getJson()?.map((data, recordNo) => {
         return (
           <div key={recordNo} className="menu-container parent">
             <input
@@ -182,7 +185,7 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
                     href="#"
                     className="regular-font weight-light"
                     onClick={(e) => {
-                      showModal(recordNo);
+                      showModal(recordNo, data.addons);
                     }}
                   >
                     Addons +
@@ -204,6 +207,7 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
                 <Toppings
                   recordNo={recordNo}
                   checkedState={checkedState}
+                  toppings={canChoose}
                   setCheckedState={setCheckedState}
                 />
               </Modal>

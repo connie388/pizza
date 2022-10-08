@@ -1,6 +1,21 @@
 export const addons = {
   type: [
     {
+      name: "meat",
+      price: 1.5,
+      list: [
+        "Pepperoni",
+        "Bacon",
+        "Hot Soppressata",
+        "Spicy Sausage",
+        "Anchovies",
+        "Grilled Chicken",
+        "Smoked Ham",
+        "Ground Beef",
+        "Chorizo",
+      ],
+    },
+    {
       name: "cheese",
       price: 1.5,
       list: [
