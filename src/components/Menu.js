@@ -47,10 +47,6 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     setCheckedState(arr);
   };
 
-  // useEffect(() => {
-  //   setSelected([]);
-  // }, [item]);
-
   const getJson = () => {
     let json = {};
     switch (item) {

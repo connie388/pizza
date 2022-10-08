@@ -1,40 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/collapsible.css";
+import Toppings from "./Toppings";
 import { Collapsible } from "../util/Collapsible";
+import { addons } from "./addons";
 
-function CustomizeItem({ customizeNo, order, setOrder }) {
+function CustomizeItem({ customizeNo, data, order, setOrder }) {
+  const [checkedState, setCheckedState] = useState(
+    Array.from({ length: addons.type.length }, () =>
+      Array.from({ length: 100 }, () => false)
+    )
+  );
   return (
     <div>
-      {/* <div>
-        <button
-          id="collapseDoughButton"
-          class="btn btn-primary menu-button"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseDough"
-          aria-expanded="false"
-          aria-controls="collapseDough"
-        >
-          Choose Your Dough <div id="dough-chosen"></div>
-        </button>
-      </div>
-      <div
-        className="collapse text-dark"
-        id="collapseDough"
-        aria-expanded="false"
-      >
-        <div className="collapsible-container">
-          <input type="radio" id="regular" name="dough" value="Regular" />
-          <label for="html">Regular</label>
-          <input
-            type="radio"
-            id="wholewheat"
-            name="dough"
-            value="Whole Wheat"
-          />
-          <label for="wholewheat">Whole Wheat</label>
-        </div>
-      </div> */}
       <Collapsible
         id="collapseDoughButton"
         target="#collapseDough"
@@ -92,7 +69,12 @@ function CustomizeItem({ customizeNo, order, setOrder }) {
         label="CHOOSE YOUR TOPPINGS"
         chosenId="chosen-topping"
       >
-        <div></div>
+        <div>
+          <Toppings
+            checkedState={checkedState}
+            setCheckedState={setCheckedState}
+          />
+        </div>
       </Collapsible>
       <Collapsible
         id="collapseCookingButton"

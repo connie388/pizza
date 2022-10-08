@@ -34,75 +34,83 @@ function Basket({ order, setOrder, item, setItem, total, setTotal }) {
         </p>
       ) : (
         <>
-          {order.map((record, index) => {
-            return (
-              <div key={index}>
-                <div className="inline">
-                  <button
-                    type="button"
-                    className="btn-close"
-                    aria-label="Close"
-                    onClick={() => {
-                      removeThisItem(index);
-                    }}
-                  />
-                  <div className="regular-font weight-semi-bold left">
-                    {record.name} {record.size}
+          <div className="content-section">
+            {order.map((record, index) => {
+              return (
+                <div key={index}>
+                  <div className="inline">
+                    <button
+                      type="button"
+                      className="btn-close"
+                      aria-label="Close"
+                      onClick={() => {
+                        removeThisItem(index);
+                      }}
+                    />
+                    <div className="regular-font weight-semi-bold left">
+                      {record.name} {record.size}
+                    </div>
+                    <div className="regular-font weight-light right">
+                      {parseFloat(record.amount).toFixed(2)}
+                    </div>
                   </div>
-                  <div className="regular-font weight-light right">
-                    {parseFloat(record.amount).toFixed(2)}
-                  </div>
+                  {record.addOns &&
+                    record.addOns.map((addOn) => {
+                      return (
+                        addOn.list &&
+                        addOn.list.map((data, index) => {
+                          return (
+                            <div key={index} className="inline">
+                              <div className="regular-font weight-light middle">
+                                +{data}
+                              </div>
+                              <div className="regular-font weight-light right">
+                                {addOn.price.toFixed(2)}
+                              </div>
+                            </div>
+                          );
+                        })
+                      );
+                    })}
                 </div>
-                {record.addOns &&
-                  record.addOns.map((addOn) => {
-                    return (
-                      addOn.list &&
-                      addOn.list.map((data, index) => {
-                        return (
-                          <div key={index} className="inline">
-                            <div className="regular-font weight-light middle">
-                              +{data}
-                            </div>
-                            <div className="regular-font weight-light right">
-                              {addOn.price.toFixed(2)}
-                            </div>
-                          </div>
-                        );
-                      })
-                    );
-                  })}
-              </div>
-            );
-          })}
-
-          <div className="inline">
-            <div className="regular-font weight-light left">Tax</div>
-            <div className="regular-font weight-light right">
-              {((total * 13) / 100).toFixed(2)}
-            </div>
+              );
+            })}
           </div>
-          <div className="inline">
-            <div className="regular-font weight-light left">Total</div>
-            <div className="regular-font weight-light right">{total}</div>
+          <div className="total-section">
+            <div className="inline">
+              <div className="regular-font weight-light left">Sub-total</div>
+              <div className="regular-font weight-light right">{total}</div>
+            </div>
+            <div className="inline">
+              <div className="regular-font weight-light left">Tax</div>
+              <div className="regular-font weight-light right">
+                {((total * 13) / 100).toFixed(2)}
+              </div>
+            </div>
+            <div className="inline">
+              <div className="regular-font weight-light left">Total</div>
+              <div className="regular-font weight-light right">
+                {((total * 113) / 100).toFixed(2)}
+              </div>
+            </div>
+            <p className="regular-font weight-semi-bold">
+              Minimum spend for delivery is $10.00
+            </p>
+            {item === "checkout" ? (
+              <></>
+            ) : (
+              <button
+                type="submit"
+                onClick={(e) => {
+                  setItem("checkout");
+                }}
+                className="select-button"
+              >
+                CHECK OUT
+              </button>
+            )}
           </div>
         </>
-      )}
-
-      <p className="regular-font weight-semi-bold">
-        Minimum spend for delivery is $10.00
-      </p>
-      {item === "checkout" ? (
-        <></>
-      ) : (
-        <button
-          type="submit"
-          onClick={(e) => {
-            setItem("checkout");
-          }}
-          className="select-button"
-        >
-          CHECK OUT
-        </button>
       )}
     </div>
   );
