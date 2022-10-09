@@ -3,6 +3,7 @@ export const menuItems = {
     {
       id: "1",
       name: "Hawaiian",
+      customize: true,
       calory: "210-260 Cals/slice",
       description: "Ham, pineapple and extra pizza mozzarella",
       image:
@@ -33,6 +34,7 @@ export const menuItems = {
     {
       id: "2",
       name: "The Great 'Beyond'",
+      customize: true,
       calory: "200-270 Cals/slice",
       description:
         "Beyond Meat Italian Sausage Crumble, hot pepers, Red Onion, and Pizza Mozzarella",
@@ -64,6 +66,7 @@ export const menuItems = {
     {
       id: "3",
       name: "Canadian",
+      customize: true,
       calory: "220-270 Cals/slice",
       description:
         "Pepperoni, bacon crumble, sliced mushrooms and pizza mozzarella",
@@ -95,6 +98,7 @@ export const menuItems = {
     {
       id: "4",
       name: "Chicken Caesar",
+      customize: true,
       new: true,
       calory: "200-240 Cals/slice",
       description:
@@ -127,6 +131,7 @@ export const menuItems = {
     {
       id: "5",
       name: "Pepperoni Lover's",
+      customize: true,
       calory: "240-290 Cals/slice",
       description: "Double pepperoni and extra pizza mozzarella",
       image:

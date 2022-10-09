@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/app.css";
 import "../styles/ribbon-corner.css";
 import "../styles/image-button.css";
-import { menuItems } from "./menuItems";
-import { addons } from "./addons";
 import Modal from "../util/Modal";
 import Toppings from "./Toppings";
+import Customize from "./Customize";
+import { menuItems } from "../data/menuItems";
+import { addons } from "../data/addons";
+import orderItem from "../util/orderItem";
 
-function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
+function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
   const [show, setShow] = useState(false); // for Modal
   const [selected, setSelected] = useState([]); // select list's choices
   const [itemNo, setItemNo] = useState(-1); // keep track of the record no that open the modal
@@ -19,9 +21,10 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     )
   );
 
-  const showModal = (recordNo, canChooseItems) => {
+  const showModal = (recordNo, data, canChooseItems) => {
     setShow(true);
     setItemNo(recordNo);
+    setCurrentData(data);
     let toppings = addons.type.filter((d, i) =>
       canChooseItems.includes(d.name)
     );
@@ -29,13 +32,15 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
   };
 
   const onSubmitModal = () => {
-    orderItem(itemNo);
+    // orderItem(itemNo, currentData);
+    orderItem(itemNo, currentData, setCurrentData, order, setOrder);
     hideModal();
   };
 
   const hideModal = () => {
     setShow(false);
     setItemNo(-1);
+
     if (addons.type) {
       for (var j = 0; j < addons.type.length; j++) {
         var checkboxes = document.getElementsByName(addons.type[j].name);
@@ -82,127 +87,62 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
     //   "ADD $" + output;
   }
 
-  const customizeItem = (recordNo) => {
-    setCustomizeNo(recordNo);
-    setItem("customize");
-  };
-
-  function orderItem(recordNo) {
-    let temp = document.getElementById("hiddenInput" + recordNo);
-    let data = JSON.parse(temp.value);
-
-    let addOnList = [];
-
-    for (var j = 0; j < addons.type?.length; j++) {
-      let addon = addons.type[j];
-      var checkboxes = document.getElementsByName(recordNo + "-" + addon.name);
-      if (checkboxes && checkboxes.length > 0) {
-        let list = [];
-        for (var i = 0; i < checkboxes.length; i++) {
-          if (checkboxes[i].checked) {
-            list.push(checkboxes[i].value);
-          }
-        }
-
-        if (list.length > 0) {
-          let listData = {
-            name: addon.name,
-            price: addon.price,
-            list: list,
-          };
-          addOnList.push(listData);
-        }
-      }
-    }
-
-    let record = [];
-    record.push({
-      name: data.name,
-      calory: data.calory,
-      description: data.description,
-      addOns: addOnList,
-    });
-
-    if (data.amount) {
-      record[0].amount = data.amount;
-    }
-
-    if (data.type) {
-      var select = document.getElementById("myList" + recordNo);
-      let index = select.selectedIndex;
-
-      record[0].size = data.type[index].size;
-      if (data.type[index].amount) record[0].amount = data.type[index].amount;
-      record[0].information = data.type[index].information;
-    }
-
-    setOrder([...order, record[0]]);
-  }
-
   return (
     <div className="box">
       {getJson()?.map((data, recordNo) => {
         return (
           <div key={recordNo} className="menu-container parent">
-            <input
-              id={"hiddenInput" + recordNo}
-              value={JSON.stringify(data)}
-              type="hidden"
-            />
             {data.hasOwnProperty("new") && data.new ? (
               <div className="ribbon regular-font weight-light">New</div>
             ) : (
               <></>
             )}
-            <div className="image-container">
-              <img
-                className="menu-image"
-                src={data.image}
-                alt={data.name}
-                onClick={(e) => {
-                  customizeItem(recordNo);
-                }}
-              />
-              <p className="customize regular-font weight-light">Customize</p>
+            <Customize
+              customize={data.customize}
+              setItem={setItem}
+              image={data.image}
+              alt={data.name}
+              setCurrentData={setCurrentData}
+              data={data}
+            >
+              <div className="item">
+                <div id="data-name" className="item-name">
+                  {data.name}
+                </div>
+                <div id="data-calory" className="regular-font weight-light">
+                  {data.calory}
+                </div>
+                <div
+                  id="data-description"
+                  className="item-desc regular-font weight-light item-desc"
+                >
+                  {data.description}
+                </div>
+              </div>
+            </Customize>
+            <div>
+              {data.addons ? (
+                <a
+                  href="#"
+                  className="regular-font weight-light"
+                  onClick={(e) => {
+                    showModal(recordNo, data, data.addons);
+                  }}
+                >
+                  Addons +
+                </a>
+              ) : (
+                <></>
+              )}
             </div>
 
-            <div className="item">
-              <div id="data-name" className="item-name">
-                {data.name}
-              </div>
-              <div id="data-calory" className="regular-font weight-light">
-                {data.calory}
-              </div>
-              <div
-                id="data-description"
-                className="item-desc regular-font weight-light item-desc"
-              >
-                {data.description}
-              </div>
-              <div>
-                {data.addons ? (
-                  <a
-                    href="#"
-                    className="regular-font weight-light"
-                    onClick={(e) => {
-                      showModal(recordNo, data.addons);
-                    }}
-                  >
-                    Addons +
-                  </a>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
             {data.addons ? (
               <Modal
                 show={show}
                 handleClose={hideModal}
                 title="CHOOSE ADDONS"
-                subtitle={"For " + data.name}
-                onSubmit={onSubmitModal}
-                recordNo={itemNo} // need to use itemNo otherwise always the largest index
+                subtitle={"For " + currentData?.name}
+                onSubmit={(e) => onSubmitModal()}
               >
                 <Toppings
                   recordNo={recordNo}
@@ -238,7 +178,7 @@ function Menu({ item, setItem, order, setOrder, setCustomizeNo }) {
               id={"select-button" + recordNo}
               type="submit"
               onClick={(e) => {
-                orderItem(recordNo);
+                orderItem(recordNo, data, setCurrentData, order, setOrder);
               }}
               className="select-button"
             >

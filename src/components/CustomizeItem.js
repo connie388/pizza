@@ -2,16 +2,55 @@ import React, { useState } from "react";
 import "../styles/collapsible.css";
 import Toppings from "./Toppings";
 import { Collapsible } from "../util/Collapsible";
-import { addons } from "./addons";
+import { RadioButton } from "../util/RadioButton";
+import DisplayImageList from "./DisplayImageList";
+import { sauces } from "../data/sauces";
+import { addons } from "../data/addons";
+import { cheese } from "../data/cheese";
+import orderItem from "../util/orderItem";
 
-function CustomizeItem({ customizeNo, data, order, setOrder }) {
+function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
+  const [selected, setSelected] = useState();
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: addons.type.length }, () =>
       Array.from({ length: 100 }, () => false)
     )
   );
+
+  function displayRadioValue() {
+    document.getElementById("result").innerHTML = "";
+    var ele = document.getElementsByTagName("input");
+
+    for (let i = 0; i < ele.length; i++) {
+      if (ele[i].type === "radio" || ele[i].type === "checkbox") {
+        if (ele[i].checked)
+          document.getElementById("result").innerHTML +=
+            ele[i].name + " Value: " + ele[i].value + "<br>";
+      }
+    }
+  }
+
   return (
-    <div>
+    <div className="customize-parent-container">
+      <div id="result"></div>
+      <div>{currentData.name}</div>
+      <div>{currentData.description}</div>
+      <select
+        id="myList000"
+        className="dropdown"
+        value={selected}
+        onChange={(event) => {
+          setSelected(event.target.value);
+        }}
+      >
+        {currentData.type.map((record, idx) => {
+          return (
+            <option key={idx} value={record.amount}>
+              {record.size} {record.information}
+            </option>
+          );
+        })}
+      </select>
       <Collapsible
         id="collapseDoughButton"
         target="#collapseDough"
@@ -19,10 +58,22 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="CHOOSE YOUR DOUGH"
         chosenId="chosen-dough"
       >
-        <input type="radio" id="regular-dough" name="dough" value="Regular" />
-        <label htmlFor="regular-dough">Regular</label>
-        <input type="radio" id="whole-wheat" name="dough" value="Whole Wheat" />
-        <label htmlFor="whole-wheat">Whole Wheat</label>
+        <RadioButton
+          index="regular-dough"
+          name="dough"
+          id="regular-dough"
+          label="Regular"
+          value="Regular"
+          onChange={displayRadioValue}
+        />
+        <RadioButton
+          index="whole-wheat"
+          name="dough"
+          id="whole-wheat"
+          label="Whole Wheat"
+          value="Whole Wheat"
+          onChange={displayRadioValue}
+        />
       </Collapsible>
       <Collapsible
         id="collapseCrustButton"
@@ -31,12 +82,30 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="CHOOSE YOUR CRUST"
         chosenId="chosen-crust"
       >
-        <input type="radio" id="regular-crust" name="crust" value="Regular" />
-        <label htmlFor="regular-crust">Regular</label>
-        <input type="radio" id="thin-crust" name="crust" value="Thin" />
-        <label htmlFor="thin-crust">Thin</label>
-        <input type="radio" id="thick-crust" name="crust" value="Thick" />
-        <label htmlFor="thick-crust">Thick</label>
+        <RadioButton
+          index="regular-crust"
+          name="crust"
+          id="regular-crust"
+          label="Regular"
+          value="Regular"
+          onChange={displayRadioValue}
+        />
+        <RadioButton
+          index="thin-crust"
+          name="crust"
+          id="thin-crust"
+          label="Thin"
+          value="Thin"
+          onChange={displayRadioValue}
+        />
+        <RadioButton
+          index="thick-crust"
+          name="crust"
+          id="thick-crust"
+          label="Thick"
+          value="Thick"
+          onChange={displayRadioValue}
+        />
       </Collapsible>
       <Collapsible
         id="collapseSauceButton"
@@ -45,10 +114,11 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="CHOOSE YOUR SAUCE"
         chosenId="chosen-sauce"
       >
-        <div>
-          Classic tomato sauce Herbed Olive Oil (White Pizza) Pesto SAUCE BBQ
-          SAUCE NO SAUCE
-        </div>
+        <DisplayImageList
+          dataList={sauces.list}
+          radioButtonGroupName="sauce-group"
+          onChange={displayRadioValue}
+        />
       </Collapsible>
       <Collapsible
         id="collapseCheeseButton"
@@ -57,10 +127,11 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="MOZZARELLA CHEESE"
         chosenId="chosen-cheese"
       >
-        <div>
-          REGULAR MOZZARELLA EASY ON CHEESE DAIYA DAIRY FREE MOZZARELLA STYLE
-          SHREDS NO CHEESE
-        </div>
+        <DisplayImageList
+          dataList={cheese.list}
+          radioButtonGroupName="cheese-group"
+          onChange={displayRadioValue}
+        />
       </Collapsible>
       <Collapsible
         id="collapseToppingsButton"
@@ -71,6 +142,7 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
       >
         <div className="customize-toppings">
           <Toppings
+            recordNo="000"
             checkedState={checkedState}
             setCheckedState={setCheckedState}
             toppings={addons.type}
@@ -84,11 +156,33 @@ function CustomizeItem({ customizeNo, data, order, setOrder }) {
         label="WELL DONE or REGULAR"
         chosenId="chosen-cooking"
       >
-        <input type="radio" id="regular-cooking" name="cook" value="Regular" />
-        <label htmlFor="regular-cooking">Regular</label>
-        <input type="radio" id="well-done" name="cook" value="Well Done" />
-        <label htmlFor="well-done">Well Done</label>
+        <RadioButton
+          index="regular-cook"
+          name="cook"
+          id="regular-cook"
+          label="Regular"
+          value="Regular"
+          onChange={displayRadioValue}
+        />
+        <RadioButton
+          index="well-done"
+          name="cook"
+          id="well-done"
+          label="Well Done"
+          value="Well Done"
+          onChange={displayRadioValue}
+        />
       </Collapsible>
+      <button
+        id="select-button"
+        type="submit"
+        onClick={(e) => {
+          orderItem("000", currentData, setCurrentData, order, setOrder);
+        }}
+        className="select-button"
+      >
+        SELECT
+      </button>
     </div>
   );
 }

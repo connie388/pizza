@@ -9,7 +9,7 @@ export const Collapsible = ({
   children,
 }) => {
   return (
-    <div>
+    <div >
       <div>
         <button
           id={id}

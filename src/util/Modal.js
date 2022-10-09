@@ -7,7 +7,6 @@ function Modal({
   title,
   subtitle,
   onSubmit,
-  recordNo,
   children,
 }) {
   useEffect(() => {
@@ -24,7 +23,7 @@ function Modal({
 
   return (
     <div
-      id={"myModal" + recordNo}
+      id={"myModal" + subtitle.split(" ").join("-")}
       className={`modal ${show ? " display-block" : "display-none"}`}
       // tabIndex="-1"
       onClick={handleClose}
@@ -52,7 +51,10 @@ function Modal({
             </div>
           </div>
           <div className="modal-body">
-            <div className="content" id={"content" + recordNo}>
+            <div
+              className="content"
+              id={"content" + subtitle.split(" ").join("-")}
+            >
               {children}
             </div>
           </div>

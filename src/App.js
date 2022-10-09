@@ -8,7 +8,6 @@ function App() {
   const [item, setItem] = useState("home");
   const [order, setOrder] = useState([]);
   const [total, setTotal] = useState(0);
-  const [customizeNo, setCustomizeNo] = useState(-1);
 
   return (
     <div className="App">
@@ -30,8 +29,6 @@ function App() {
           setOrder={setOrder}
           total={total}
           setTotal={setTotal}
-          customizeNo={customizeNo}
-          setCustomizeNo={setCustomizeNo}
         />
       )}
     </div>
