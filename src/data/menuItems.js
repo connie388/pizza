@@ -10,24 +10,34 @@ export const menuItems = {
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.hawaiian.6c049fb1897c6f45f597dd1671fbd016.1.jpg?width=300",
       type: [
         {
+          shape: "circle",
           size: "Small",
           amount: "6.99",
           information: "6 slices",
         },
         {
+          shape: "circle",
           size: "Medium",
           amount: "14.99",
           information: "8 slices",
         },
         {
+          shape: "circle",
           size: "Large",
           amount: "19.99",
           information: "10 slices",
         },
         {
+          shape: "circle",
           size: "X-large",
           amount: "25.99",
           information: "12 slices",
+        },
+        {
+          shape: "rectangle",
+          size: '21"x15" Party',
+          amount: "28.99",
+          information: "24 slices",
         },
       ],
     },
@@ -42,24 +52,34 @@ export const menuItems = {
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.the-great-beyond.76c7634f22629bc22d55ed0525beb267.1.jpg?width=300",
       type: [
         {
+          shape: "circle",
           size: "Small",
           amount: "6.99",
           information: "6 slices",
         },
         {
+          shape: "circle",
           size: "Medium",
           amount: "14.99",
           information: "8 slices",
         },
         {
+          shape: "circle",
           size: "Large",
           amount: "19.99",
           information: "10 slices",
         },
         {
+          shape: "circle",
           size: "X-large",
           amount: "25.99",
           information: "12 slices",
+        },
+        {
+          shape: "rectangle",
+          size: '21"x15" Party',
+          amount: "29.99",
+          information: "24 slices",
         },
       ],
     },
@@ -74,24 +94,34 @@ export const menuItems = {
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.canadian.67c22dc316f702bf4d992c667d22fbf0.1.jpg?width=300",
       type: [
         {
+          shape: "circle",
           size: "Small",
           amount: "6.99",
           information: "6 slices",
         },
         {
+          shape: "circle",
           size: "Medium",
           amount: "14.99",
           information: "8 slices",
         },
         {
+          shape: "circle",
           size: "Large",
           amount: "19.99",
           information: "10 slices",
         },
         {
+          shape: "circle",
           size: "X-large",
           amount: "25.99",
           information: "12 slices",
+        },
+        {
+          shape: "rectangle",
+          size: '21"x15" Party',
+          amount: "28.99",
+          information: "24 slices",
         },
       ],
     },
@@ -107,24 +137,34 @@ export const menuItems = {
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.chicken-caesar.114207d9da87f8eb6b897e3ef5397b6a.1.jpg?width=300",
       type: [
         {
+          shape: "circle",
           size: "Small",
           amount: "6.99",
           information: "6 slices",
         },
         {
+          shape: "circle",
           size: "Medium",
           amount: "14.99",
           information: "8 slices",
         },
         {
+          shape: "circle",
           size: "Large",
           amount: "19.99",
           information: "10 slices",
         },
         {
+          shape: "circle",
           size: "X-large",
           amount: "25.99",
           information: "12 slices",
+        },
+        {
+          shape: "rectangle",
+          size: '21"x15" Party',
+          amount: "28.99",
+          information: "24 slices",
         },
       ],
     },
@@ -138,24 +178,34 @@ export const menuItems = {
         "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/pizza/pizza.veggie-lovers.48ba54d49ff2257671521b477967633a.1.jpg",
       type: [
         {
+          shape: "circle",
           size: "Small",
           amount: "6.99",
           information: "6 slices",
         },
         {
+          shape: "circle",
           size: "Medium",
           amount: "14.99",
           information: "8 slices",
         },
         {
+          shape: "circle",
           size: "Large",
           amount: "19.99",
           information: "10 slices",
         },
         {
+          shape: "circle",
           size: "X-large",
           amount: "25.99",
           information: "12 slices",
+        },
+        {
+          shape: "rectangle",
+          size: '21"x15" Party',
+          amount: "28.99",
+          information: "24 slices",
         },
       ],
     },

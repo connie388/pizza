@@ -8,10 +8,8 @@ import { sauces } from "../data/sauces";
 import { addons } from "../data/addons";
 import { cheese } from "../data/cheese";
 import orderItem from "../util/orderItem";
-import SelectList from "../util/SelectList";
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
-  const [selected, setSelected] = useState();
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: addons.type.length }, () =>
       Array.from({ length: 100 }, () => false)
@@ -33,18 +31,33 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
 
   return (
     <div className="customize-parent-container">
-      <div id="result"></div>
-      <div>{currentData.name}</div>
-      <div>{currentData.description}</div>
-      <SelectList id="myList000" classNm="dropdown">
+      <div className="inline m-5">
+        {currentData.image ? (
+          <img
+            className="customize-image"
+            src={currentData.image}
+            alt={currentData.name}
+          />
+        ) : (
+          <></>
+        )}
+        <div>
+          <h5>{currentData.name}</h5>
+          <h6>{currentData.description}</h6>
+        </div>
+      </div>
+      <div className="inline">
         {currentData.type.map((record, idx) => {
           return (
-            <option key={idx} value={record.amount}>
-              {record.size} {record.information}
-            </option>
+            <div className="detail-section">
+              <div id={record.shape}>{record.size}</div>
+              <div className="text-center small-font weight-semi-bold">
+                {record.information}
+              </div>
+            </div>
           );
         })}
-      </SelectList>
+      </div>
 
       <Collapsible
         id="collapseDoughButton"
