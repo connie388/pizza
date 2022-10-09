@@ -8,6 +8,7 @@ import { sauces } from "../data/sauces";
 import { addons } from "../data/addons";
 import { cheese } from "../data/cheese";
 import orderItem from "../util/orderItem";
+import SelectList from "../util/SelectList";
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
   const [selected, setSelected] = useState();
@@ -35,14 +36,7 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
       <div id="result"></div>
       <div>{currentData.name}</div>
       <div>{currentData.description}</div>
-      <select
-        id="myList000"
-        className="dropdown"
-        value={selected}
-        onChange={(event) => {
-          setSelected(event.target.value);
-        }}
-      >
+      <SelectList id="myList000" classNm="dropdown">
         {currentData.type.map((record, idx) => {
           return (
             <option key={idx} value={record.amount}>
@@ -50,7 +44,8 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
             </option>
           );
         })}
-      </select>
+      </SelectList>
+
       <Collapsible
         id="collapseDoughButton"
         target="#collapseDough"

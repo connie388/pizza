@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styles/image-button.css";
 function Customize({
   customize,
   setItem,
@@ -23,14 +23,18 @@ function Customize({
             customizeItem();
           }}
         >
-          <img className="menu-image" src={image} alt={alt} />
+          <img
+            className="customize-menu-image menu-image"
+            src={image}
+            alt={alt}
+          />
           <p className="customize regular-font weight-light">Customize</p>
           {children}
         </div>
       ) : (
-        <div className="image-container">
+        <div className="image-container context-menu">
           <img className="menu-image" src={image} alt={alt} />
-          {children}
+          <div className="context-menu">{children}</div>
         </div>
       )}
     </div>

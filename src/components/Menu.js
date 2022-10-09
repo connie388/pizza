@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/app.css";
 import "../styles/ribbon-corner.css";
 import "../styles/image-button.css";
@@ -8,10 +8,12 @@ import Customize from "./Customize";
 import { menuItems } from "../data/menuItems";
 import { addons } from "../data/addons";
 import orderItem from "../util/orderItem";
+import SelectList from "../util/SelectList";
 
 function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
   const [show, setShow] = useState(false); // for Modal
-  const [selected, setSelected] = useState([]); // select list's choices
+  const [selected, setSelected] = useState([]);
+  // select list's choices
   const [itemNo, setItemNo] = useState(-1); // keep track of the record no that open the modal
   const [canChoose, setCanChoose] = useState([]);
 
@@ -20,6 +22,10 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
       Array.from({ length: 100 }, () => false)
     )
   );
+
+  useEffect(() => {
+    setSelected([]);
+  }, [item]);
 
   const showModal = (recordNo, data, canChooseItems) => {
     setShow(true);
@@ -76,7 +82,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
     return json;
   };
 
-  function selectItem(event, recordNo) {
+  function onSelectChange(event, recordNo) {
     let copy = [...selected];
     copy[recordNo] = event.target.value;
     setSelected(copy); // update the state of select list
@@ -105,7 +111,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
               setCurrentData={setCurrentData}
               data={data}
             >
-              <div className="item">
+              <div className={data.customize ? "item" : "item  context-menu"}>
                 <div id="data-name" className="item-name">
                   {data.name}
                 </div>
@@ -155,13 +161,12 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
               <></>
             )}
             {data.hasOwnProperty("type") ? (
-              <select
+              <SelectList
                 id={"myList" + recordNo}
-                className="dropdown"
+                recordNo={recordNo}
                 value={selected[recordNo]}
-                onChange={(e) => {
-                  selectItem(e, recordNo);
-                }}
+                onSelectChange={onSelectChange}
+                classNm="dropdown"
               >
                 {data.type.map((record, idx) => {
                   return (
@@ -170,7 +175,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
                     </option>
                   );
                 })}
-              </select>
+              </SelectList>
             ) : (
               <></>
             )}

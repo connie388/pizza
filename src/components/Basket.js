@@ -20,14 +20,14 @@ function Basket({ order, setOrder, item, setItem, total, setTotal }) {
   }, [order, setTotal]);
 
   return (
-    <div className="basket">
-      <h4>My Cart</h4>
-      <div>
+    <div className="basket context-menu">
+      <h4 className="context-menu">My Cart</h4>
+      <div className="context-menu">
         <i className="cart fa fa-shopping-cart"></i>{" "}
         <b>{order.length === 0 ? "Empty Cart" : order.length}</b>
       </div>
       {order.length === 0 ? (
-        <p className="small-font weight-regular">
+        <p className="small-font weight-regular context-menu">
           Your basket looks a little empty. Just start adding food and we will
           automatically apply our most popular deals! You might be able to find
           better deals on our deals page though so remember to check there too!
@@ -76,7 +76,7 @@ function Basket({ order, setOrder, item, setItem, total, setTotal }) {
               );
             })}
           </div>
-          <div className="total-section">
+          <div className="total-section context-menu">
             <div className="inline">
               <div className="regular-font weight-light left">Sub-total</div>
               <div className="regular-font weight-light right">{total}</div>
