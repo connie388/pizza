@@ -76,6 +76,12 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
       case "pastas":
         json = menuItems.pastas;
         break;
+      case "sides":
+        json = menuItems.sides;
+        break;
+      case "drink":
+        json = menuItems.drink;
+        break;
       default:
         json = menuItems.pizzas;
     }
@@ -99,7 +105,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
         return (
           <div key={recordNo} className="menu-container parent">
             {data.hasOwnProperty("new") && data.new ? (
-              <div className="ribbon regular-font weight-light">New</div>
+              <div className="ribbon regular-font font-weight-light">New</div>
             ) : (
               <></>
             )}
@@ -115,12 +121,12 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
                 <div id="data-name" className="item-name">
                   {data.name}
                 </div>
-                <div id="data-calory" className="regular-font weight-light">
+                <div id="data-calory" className="regular-font font-weight-light">
                   {data.calory}
                 </div>
                 <div
                   id="data-description"
-                  className="item-desc regular-font weight-light item-desc"
+                  className="item-desc regular-font font-weight-light item-desc"
                 >
                   {data.description}
                 </div>
@@ -130,7 +136,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
               {data.addons ? (
                 <a
                   href="#"
-                  className="regular-font weight-light"
+                  className="regular-font font-weight-light"
                   onClick={(e) => {
                     showModal(recordNo, data, data.addons);
                   }}

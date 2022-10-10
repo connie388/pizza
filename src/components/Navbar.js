@@ -17,13 +17,13 @@ function Navbar({ item, setItem }) {
 
   return (
     <div className="topnav" id="myTopnav">
-      <a
+      {/* <a
         href="#"
         className={item === "home" ? "active" : "navitem"}
         onClick={() => changeActiveItem("home")}
       >
         Home
-      </a>
+      </a> */}
       <a
         href="#"
         className={item === "pizzas" ? "active" : "navitem"}
@@ -52,18 +52,18 @@ function Navbar({ item, setItem }) {
       >
         Sides
       </a>
-      <a
+      {/* <a
         href="#"
         className={item === "desserts" ? "active" : "navitem"}
         onClick={() => changeActiveItem("desserts")}
       >
         Desserts
-      </a>
+      </a> */}
       <a
         href="#"
-        name="drinks"
-        className={item === "drinks" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("drinks")}
+        name="drink"
+        className={item === "drink" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("drink")}
       >
         Drinks
       </a>

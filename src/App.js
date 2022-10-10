@@ -5,7 +5,7 @@ import Order from "./components/Order";
 import CheckOut from "./components/CheckOut";
 
 function App() {
-  const [item, setItem] = useState("home");
+  const [item, setItem] = useState("pizza");
   const [order, setOrder] = useState([]);
   const [total, setTotal] = useState(0);
 

@@ -349,4 +349,145 @@ export const menuItems = {
       ],
     },
   ],
+  drink: [
+    {
+      id: "14",
+      name: "Diet Pepsi",
+      calory: "0 Cals/serving",
+      description:
+        "Light. Crisp. Refreshing. With zero sugar, zero calories, and zero carbs.",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/drink/drink.diet-pepsi.5051b0512802644d63fd800ee4375414.1.jpg",
+      type: [
+        {
+          size: "2 Liter",
+          amount: "3.99",
+          information: "Serves 8",
+        },
+        {
+          size: "591ml Bottle",
+          amount: "2.99",
+          information: "Serves 1",
+        },
+      ],
+    },
+    {
+      id: "15",
+      name: "7 Up",
+      calory: "110 Cals/serving",
+      description:
+        "The crisp, clean taste of 7UP® delivers more of the natural lemon-lime flavor you love. With no caffeine and 100% natural flavors, 7UP® is always refreshing",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/drink/drink.7up.7a1925da523094943917270945a29b76.1.jpg",
+      type: [
+        {
+          size: "2 Liter",
+          amount: "3.99",
+          information: "Serves 8 110 Cals/serving",
+        },
+        {
+          size: "591ml Bottle",
+          amount: "2.99",
+          information: "Serves 1 260 Cals/serving",
+        },
+      ],
+    },
+  ],
+  sides: [
+    {
+      id: "16",
+      name: "Breadsticks",
+      calory: "190-230 Cals/stick",
+      description:
+        "Crispy on the outside, soft and chewy on the inside. Served with marinara dipping sauce. Try an order with cheese.",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/side/side.breadsticks.26b3b1ecb8a49b6a3c9084692691a8a8.1.jpg",
+      type: [
+        {
+          size: "Large",
+          amount: "8.29",
+          information: "10 sticks 190-230 Cals/stick",
+        },
+        {
+          size: "Regular",
+          amount: "5.29",
+          information: "5 sticks 190 Cals/stick",
+        },
+      ],
+    },
+    {
+      id: "17",
+      name: "Mozzarella Sticks",
+      calory: "80 Cals/serving",
+      description:
+        "Loaded with real gooey mozzarella and a crispy breading that delivers a big CRUNCH. Comes with a dip.",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/side/side.mozzarella-sticks.3cf4998d37d1d595631dd1d770b60caf.1.jpg",
+      type: [
+        {
+          size: "Creamy Garlic Dip",
+          amount: "11.29",
+          information: "210 Cals/dip",
+        },
+        {
+          size: "Marinara",
+          amount: "11.29",
+          information: "30 Cals/dip",
+        },
+
+        {
+          size: "Peppercorn Ranch Dip",
+          amount: "11.29",
+          information: "190 Cals/dip",
+        },
+        {
+          size: "Cheddar Jalapeno Dip",
+          amount: "11.29",
+          information: "170 Cals/dip",
+        },
+      ],
+    },
+    {
+      id: "18",
+      name: "Chicken Caesar Salad",
+      calory: "310 Cals/serving",
+      description:
+        "Seasoned grilled chicken breast, romaine lettuce, bacon strips, croutons and parmesan. Served with creamy Caesar dressing.",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/side/side.chicken-caesar-salad.fe1777de841d66ee285b28352f141409.1.jpg",
+      type: [
+        {
+          size: "Large",
+          amount: "9.29",
+          information: "Serves 2",
+        },
+        {
+          size: "Regular",
+          amount: "6.29",
+          information: "Serves 1",
+        },
+      ],
+    },
+    {
+      id: "19",
+      name: "Caesar Salad",
+      calory: "260 Cals/serving",
+      description:
+        "Romaine lettuce, bacon strips, croutons and parmesan. Served with creamy Caesar dressing.",
+      image:
+        "https://api.pizzahut.io/v1/content/en-ca/ca-1/images/side/side.caesar-salad.5b52ac96d853fffd0161b2b2d863c11e.1.jpg",
+      type: [
+        {
+          size: "Large",
+          amount: "9.29",
+          information: "Serves 2",
+        },
+        {
+          size: "Regular",
+          amount: "6.29",
+          information: "Serves 1",
+        },
+      ],
+    },
+  ],
 };
