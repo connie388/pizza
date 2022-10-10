@@ -187,7 +187,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
               }}
               className="select-button"
             >
-              SELECT
+              ADD TO CART
               {/* ADD
               {data.hasOwnProperty("type") ? data.type[0].amount : data.amount} */}
             </button>

@@ -33,7 +33,7 @@ function orderItem(recordNo, data, setCurrentData, order, setOrder) {
     name: data.name,
     calory: data.calory,
     description: data.description,
-    addOns: addOnList,
+    toppings: addOnList,
   });
 
   if (data.amount) {

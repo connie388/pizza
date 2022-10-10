@@ -14,7 +14,7 @@ function Toppings({ recordNo, checkedState, toppings, setCheckedState }) {
           <div key={"type" + addon.name}>
             <label
               id={"type" + addon.name}
-              className="regular-font weight-semi-bold green"
+              className="regular-font font-weight-bold green"
             >
               {addon.name.toUpperCase() + " TOPPINGS"}
             </label>

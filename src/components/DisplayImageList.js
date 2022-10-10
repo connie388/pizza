@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { RadioButton } from "../util/RadioButton";
 
-function DisplayImageList({ dataList, radioButtonGroupName, onChange }) {
-  const [selected, setSelected] = useState();
+function DisplayImageList({
+  dataList,
+  radioButtonGroupName,
+  material,
+  preOrder,
+  setPreOrder,
+}) {
+  const [selected, setSelected] = useState("");
 
   return (
     <div className="box">
@@ -13,9 +19,13 @@ function DisplayImageList({ dataList, radioButtonGroupName, onChange }) {
             className={
               selected === data.name
                 ? "sauce-box inline selected"
-                : "sauce-box inline"
+                : "sauce-box inline not-selected"
             }
-            onClick={(e) => setSelected(data.name)}
+            onClick={(e) => {
+              setSelected(data.name);
+              let previousPreOrder = preOrder;
+              setPreOrder({ ...previousPreOrder, [material]: data.name });
+            }}
           >
             {data.image ? (
               <img className="sauce-image" src={data.image} alt={data.name} />
@@ -24,7 +34,7 @@ function DisplayImageList({ dataList, radioButtonGroupName, onChange }) {
             )}
             <div>
               <div className="detail-section">
-                <div className="large-font weight-semi-bold">{data.name}</div>
+                <div className="large-font font-weight-bold">{data.name}</div>
                 <div>
                   {data.type ? (
                     <div className="inline">
@@ -39,7 +49,19 @@ function DisplayImageList({ dataList, radioButtonGroupName, onChange }) {
                               label={type}
                               value={type}
                               class="none"
-                              onChange={onChange}
+                              onChange={(e) => {
+                                setSelected(data.name);
+                                let value =
+                                  data.name +
+                                  " (" +
+                                  e.currentTarget.value +
+                                  ")";
+                                let previousPreOrder = preOrder;
+                                setPreOrder({
+                                  ...previousPreOrder,
+                                  [material]: value,
+                                });
+                              }}
                             />
                           </p>
                         );

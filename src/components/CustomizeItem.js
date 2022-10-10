@@ -7,31 +7,87 @@ import DisplayImageList from "./DisplayImageList";
 import { sauces } from "../data/sauces";
 import { addons } from "../data/addons";
 import { cheese } from "../data/cheese";
-import orderItem from "../util/orderItem";
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
+  const [selectedDough, setSelectedDough] = useState();
+  const [selectedCrust, setSelectedCrust] = useState();
+  const [selectedCook, setSelectedCook] = useState();
+  const [preOrder, setPreOrder] = useState({
+    size: currentData.type[0].size,
+    amount: currentData.type[0].amount,
+    information: currentData.type[0].information,
+  });
+
   const [checkedState, setCheckedState] = useState(
     Array.from({ length: addons.type.length }, () =>
       Array.from({ length: 100 }, () => false)
     )
   );
 
-  function displayRadioValue() {
-    document.getElementById("result").innerHTML = "";
-    var ele = document.getElementsByTagName("input");
+  function getToppings() {
+    let addOnList = [];
 
-    for (let i = 0; i < ele.length; i++) {
-      if (ele[i].type === "radio" || ele[i].type === "checkbox") {
-        if (ele[i].checked)
-          document.getElementById("result").innerHTML +=
-            ele[i].name + " Value: " + ele[i].value + "<br>";
+    for (var j = 0; j < addons.type?.length; j++) {
+      let addon = addons.type[j];
+      var checkboxes = document.getElementsByName("000" + "-" + addon.name);
+      if (checkboxes && checkboxes.length > 0) {
+        let list = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            list.push(checkboxes[i].value);
+          }
+        }
+
+        if (list.length > 0) {
+          let listData = {
+            name: addon.name,
+            price: addon.price,
+            list: list,
+          };
+          addOnList.push(listData);
+        }
       }
     }
+    return addOnList;
+  }
+
+  function onSubmit() {
+    let toppings = getToppings();
+
+    let thisOrder = {
+      ...preOrder,
+      name: currentData.name,
+      description: currentData.description,
+      calory: currentData.calory,
+      toppings: toppings,
+    };
+
+    // var ele = document.getElementsByTagName("input");
+    // for (let i = 0; i < ele.length; i++) {
+    //   if (ele[i].type === "radio") {
+    //     if (
+    //       ele[i].checked &&
+    //       ele[i].name !== "sauce" &&
+    //       ele[i].name !== "cheese"
+    //     ) {
+    //       let data = thisOrder;
+    //       thisOrder = { ...data, [ele[i].name]: ele[i].value };
+    //     }
+    //   }
+    // }
+
+    let previousOrder = order;
+    setOrder([...previousOrder, thisOrder]);
+  }
+
+  function onChange(e, name) {
+    let data = { ...preOrder, [name]: e.target.value };
+    setPreOrder(data);
   }
 
   return (
     <div className="customize-parent-container">
-      <div className="inline m-5">
+      <div className="inline m-3">
         {currentData.image ? (
           <img
             className="customize-image"
@@ -49,8 +105,24 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
       <div className="inline">
         {currentData.type.map((record, idx) => {
           return (
-            <div className="detail-section">
-              <div id={record.shape}>{record.size}</div>
+            <div key={idx} className="detail-section">
+              <div
+                id={record.shape}
+                className={
+                  preOrder.size === record.size ? "selected" : "not-selected"
+                }
+                onClick={(e) => {
+                  let data = {
+                    ...preOrder,
+                    size: record.size,
+                    amount: record.amount,
+                    information: record.information,
+                  };
+                  setPreOrder(data);
+                }}
+              >
+                {record.size}
+              </div>
               <div className="text-center small-font weight-semi-bold">
                 {record.information}
               </div>
@@ -71,8 +143,12 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
           name="dough"
           id="regular-dough"
           label="Regular"
-          value="Regular"
-          onChange={displayRadioValue}
+          value="Regular Dough"
+          selected={selectedDough}
+          onChange={(e) => {
+            onChange(e, "dough");
+            setSelectedDough("Regular Dough");
+          }}
         />
         <RadioButton
           index="whole-wheat"
@@ -80,7 +156,11 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
           id="whole-wheat"
           label="Whole Wheat"
           value="Whole Wheat"
-          onChange={displayRadioValue}
+          selected={selectedDough}
+          onChange={(e) => {
+            onChange(e, "dough");
+            setSelectedDough("Whole Wheat");
+          }}
         />
       </Collapsible>
       <Collapsible
@@ -95,24 +175,36 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
           name="crust"
           id="regular-crust"
           label="Regular"
-          value="Regular"
-          onChange={displayRadioValue}
+          value="Regular Crust"
+          selected={selectedCrust}
+          onChange={(e) => {
+            onChange(e, "crust");
+            setSelectedCrust("Regular Crust");
+          }}
         />
         <RadioButton
           index="thin-crust"
           name="crust"
           id="thin-crust"
           label="Thin"
-          value="Thin"
-          onChange={displayRadioValue}
+          value="Thin Crust"
+          selected={selectedCrust}
+          onChange={(e) => {
+            onChange(e, "crust");
+            setSelectedCrust("Thin Crust");
+          }}
         />
         <RadioButton
           index="thick-crust"
           name="crust"
           id="thick-crust"
           label="Thick"
-          value="Thick"
-          onChange={displayRadioValue}
+          value="Thick Crust"
+          selected={selectedCrust}
+          onChange={(e) => {
+            onChange(e, "crust");
+            setSelectedCrust("Thick Crust");
+          }}
         />
       </Collapsible>
       <Collapsible
@@ -125,7 +217,9 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
         <DisplayImageList
           dataList={sauces.list}
           radioButtonGroupName="sauce-group"
-          onChange={displayRadioValue}
+          material="sauce"
+          preOrder={preOrder}
+          setPreOrder={setPreOrder}
         />
       </Collapsible>
       <Collapsible
@@ -138,7 +232,9 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
         <DisplayImageList
           dataList={cheese.list}
           radioButtonGroupName="cheese-group"
-          onChange={displayRadioValue}
+          material="cheese"
+          preOrder={preOrder}
+          setPreOrder={setPreOrder}
         />
       </Collapsible>
       <Collapsible
@@ -169,8 +265,12 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
           name="cook"
           id="regular-cook"
           label="Regular"
-          value="Regular"
-          onChange={displayRadioValue}
+          value="Regular Done"
+          selected={selectedCook}
+          onChange={(e) => {
+            onChange(e, "cook");
+            setSelectedCook("Regular Done");
+          }}
         />
         <RadioButton
           index="well-done"
@@ -178,18 +278,20 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
           id="well-done"
           label="Well Done"
           value="Well Done"
-          onChange={displayRadioValue}
+          selected={selectedCook}
+          onChange={(e) => {
+            onChange(e, "cook");
+            setSelectedCook("Well Done");
+          }}
         />
       </Collapsible>
       <button
         id="select-button"
         type="submit"
-        onClick={(e) => {
-          orderItem("000", currentData, setCurrentData, order, setOrder);
-        }}
+        onClick={onSubmit}
         className="select-button"
       >
-        SELECT
+        ADD TO CART
       </button>
     </div>
   );

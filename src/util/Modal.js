@@ -1,14 +1,7 @@
 import "../styles/modal.css";
 import { useEffect } from "react";
 
-function Modal({
-  handleClose,
-  show,
-  title,
-  subtitle,
-  onSubmit,
-  children,
-}) {
+function Modal({ handleClose, show, title, subtitle, onSubmit, children }) {
   useEffect(() => {
     const closeOnEscapeKeyDown = (e) => {
       if ((e.charCode || e.keyCode) === 27) {
@@ -46,7 +39,7 @@ function Modal({
           </div>
           <div className="modal-header display-block">
             <h5 className="modal-title">{title}</h5>
-            <div className="modal-title regular-font weight-semi-bold">
+            <div className="modal-title regular-font font-weight-bold">
               {subtitle}
             </div>
           </div>

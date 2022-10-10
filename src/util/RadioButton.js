@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import "../styles/radioButton.css";
+
 export const RadioButton = ({
   border,
   index,
@@ -7,11 +9,18 @@ export const RadioButton = ({
   label,
   value,
   onChange,
+  selected,
 }) => {
   return (
     <label
       key={index}
-      className={`${border ? "radio-no-border" : "radio-border"}`}
+      className={`${
+        border
+          ? "radio-no-border"
+          : selected === value
+          ? "radio-border selected"
+          : "radio-border not-selected"
+      }`}
     >
       <input
         key={index}
